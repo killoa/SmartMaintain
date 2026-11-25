@@ -40,7 +40,8 @@ models = {
                       {"n_estimators": 200, "class_weight": "balanced", "scaling": "none"}),
 }
 
-mlflow.set_tracking_uri("sqlite:///mlflow.db")   # same URI must be used for `mlflow ui`
+import os
+mlflow.set_tracking_uri(os.environ.get("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db"))   # default local; set env to log to DagsHub
 mlflow.set_experiment("SmartMaintain-baseline")
 cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED)
 rows = []
