@@ -22,8 +22,19 @@ python eda.py            # prints stats, saves figures in reports/
 python train.py          # trains 2 models, logs 2 MLflow runs, saves models/ and reports/
 mlflow ui --backend-store-uri sqlite:///mlflow.db     # open http://127.0.0.1:5000
 ```
-Without a DVC remote, `data/ai4i2020.csv` is not stored in Git: download it from the UCI link above
-(then `dvc status` should show it matches `data/ai4i2020.csv.dvc`).
+`data/ai4i2020.csv` is not stored in Git; it is versioned with DVC (pointer file `data/ai4i2020.csv.dvc`).
+DVC remote: DagsHub (`https://dagshub.com/killoa/SmartMaintain.dvc`). To fetch the data, set your own DagsHub
+credentials locally (never commit them), then pull:
+```
+dvc remote modify --local storage auth basic
+dvc remote modify --local storage user <dagshub-username>
+dvc remote modify --local storage password <dagshub-token>
+dvc pull
+```
+Fallback: download the CSV from the UCI link above into `data/`; `dvc status` should then report it up to date.
+
+Optional threshold tuning (Random Forest, threshold chosen on out-of-fold train predictions): `python threshold.py`
+-> `reports/threshold_tuning.csv`. At threshold 0.32 test recall rises 0.66 -> 0.82 while precision falls 0.71 -> 0.54.
 
 ## Results (held-out 20% test set, seed 42, stratified split; failure class = positive)
 | Model | Precision | Recall | F1 | Avg. precision | Accuracy | CV F1 (5-fold, train only) |
@@ -36,6 +47,6 @@ Always predicting "no failure" would already give 96.61% accuracy, so accuracy i
 The test set holds 68 failures, so these figures are noisy. Evidence is in `reports/`.
 
 ## Status
-Implemented: EDA, two baseline pipelines (Pipeline + ColumnTransformer), local MLflow tracking (SQLite), local Git, DVC data tracking (no remote).
+Implemented: EDA, two baseline pipelines (Pipeline + ColumnTransformer), local MLflow tracking (SQLite), local Git, DVC data tracking with a DagsHub remote (data pushed).
 Planned (not done): GitHub remote, FastAPI, Docker, GitHub Actions CI/CD, Evidently monitoring, optional Prefect.
 Note: the model is logged to MLflow as a joblib artifact because MLflow's skops serializer rejected the Random Forest tree type.
