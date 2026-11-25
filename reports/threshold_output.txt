@@ -1,0 +1,4 @@
+Chosen threshold (max OOF F2 on train): 0.32
+   threshold  precision  recall    f1    f2  false_alarms  missed
+default 0.50      0.714   0.662 0.687 0.672            18      23
+  tuned 0.32      0.538   0.824 0.651 0.745            48      12
