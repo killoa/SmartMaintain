@@ -1,0 +1,10 @@
+2026/11/25 02:06:14 INFO mlflow.agent.hint: Load the `mlflow-trace-instrumentation` skill at C:\Repo\SmartDrachneya\.venv\Lib\site-packages\mlflow\assistant\skills\mlflow-trace-instrumentation\SKILL.md before writing any tracing code; it ships with this MLflow install. Set MLFLOW_DISABLE_AGENT_HINT=1 to silence this.
+2026/11/25 02:06:15 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/11/25 02:06:15 INFO mlflow.store.db.utils: Updating database tables
+2026/11/25 02:06:17 INFO mlflow.tracking.fluent: Experiment with name 'SmartMaintain-baseline' does not exist. Creating a new experiment.
+logistic_regression {'precision': 0.1418, 'recall': 0.8235, 'f1': 0.2419, 'average_precision': 0.3818, 'accuracy': 0.8245, 'cv_f1_mean': np.float64(0.2346), 'cv_f1_std': np.float64(0.01)}
+random_forest {'precision': 0.7143, 'recall': 0.6618, 'f1': 0.687, 'average_precision': 0.7615, 'accuracy': 0.9795, 'cv_f1_mean': np.float64(0.6678), 'cv_f1_std': np.float64(0.0429)}
+
+               model  precision  recall     f1  average_precision  accuracy  cv_f1_mean  cv_f1_std
+logistic_regression     0.1418  0.8235 0.2419             0.3818    0.8245      0.2346     0.0100
+      random_forest     0.7143  0.6618 0.6870             0.7615    0.9795      0.6678     0.0429

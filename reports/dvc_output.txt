@@ -1,0 +1,8 @@
+
+To track the changes with git, run:
+
+	git add 'data\ai4i2020.csv.dvc' 'data\.gitignore'
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
